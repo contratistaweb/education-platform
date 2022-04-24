@@ -1,31 +1,29 @@
 import {Injectable} from '@angular/core';
+import {Course} from "../interfaces/course";
+import {environment} from "../../../environments/environment";
+import courses from 'src/assets/json/courses.json';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CoursesService {
 
+  courses: Course[] = courses;
+  clientId = environment.clientId
 
-  constructor() {
+  constructor() {  }
+
+  getCoursesJSON = (): Course[] => {
+    return courses;
   }
 
-  getCourses = () => {
-    let nCards = 1;
-    let courses = [];
-    do {
-      courses.push({
-        id: `${nCards}`,
-        name: `course ${nCards}`,
-        description: "this is a description for the course.",
-        temary: [`temary ${nCards}`, `temary ${nCards + 1}`, `temary ${nCards + 2}`, `temary ${nCards + 3}`],
-        category: `${nCards % 3 ? 'html' : 'javascript'}`,
-        tags: [`tag_${nCards}`, `tag_${nCards + 1}`, `tag_${nCards + 2}`],
-        price: Math.random() * 10000,
-        seen: false,
-      })
-      nCards++
-    }
-    while (nCards < 10)
-    return courses;
+  getCourseForId = (id: string): Course => {
+    return this.courses.filter(course => course.id === id)[0];
+  }
+
+  updateCourse = (id: string, course: Course): Course[] => {
+    this.courses = this.courses.filter(course => course.id !== id);
+    this.courses.push(course);
+    return this.courses;
   }
 }

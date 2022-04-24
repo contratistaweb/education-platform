@@ -1,1 +1,21 @@
-<p>courses works!</p>
+<div class="container my-3">
+  <div class="row">
+    <h1>Courses</h1>
+    <div class="row col-8">
+      <mat-form-field appearance="fill" class="col-4">
+        <mat-label>Select</mat-label>
+        <mat-select (valueChange)="categorySelected($event)">
+          <mat-option *ngFor="let category of categories" [value]="category">{{category}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="col-4">
+      <button class="btn btn-outline-primary" *ngIf="showFilterCategories" (click)="showButton()">Clear filter</button>
+      </div>
+    </div>
+
+    <div class="row row-cols-md-4 g-3">
+      <card *ngFor="let card of courses" [card]="card" [showCardActions]="showCardActions"></card>
+    </div>
+  </div>
+</div>
+

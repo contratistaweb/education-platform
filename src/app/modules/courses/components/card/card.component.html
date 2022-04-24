@@ -1,1 +1,20 @@
-<p>card works!</p>
+<mat-card class="example-card col" [id]="card.id">
+  <mat-card-header>
+    <mat-card-title>{{card.name}}</mat-card-title>
+    <mat-card-subtitle>Category: {{card.category}}</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image class="example-header-image" [src]="card.image" alt="Photo of a Shiba Inu">
+  <mat-card-content>
+    <p>
+      {{card.description}}
+    </p>
+  </mat-card-content>
+  <mat-card-actions class="row row-cols-3" *ngIf="showCardActions">
+    <button mat-button class="col" (click)="showModalTemary(card.id)">Temary</button>
+    <button mat-button class="col" [routerLink]="['/home/'+card.id]">Details</button>
+
+    <mat-icon class="text-end col" aria-hidden="false"
+              aria-label="Example home icon">{{card.seen ? 'visibility' : 'visibility_off'}}</mat-icon>
+
+  </mat-card-actions>
+</mat-card>
